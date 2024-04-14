@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
 </head>
+<style>
+    body {
+        text-align: center;
+    }
+    h1 {
+        font-size: 50px;
+    }
+</style>
 <body>
     <header>
         <h1>Settings</h1>
@@ -13,40 +21,51 @@
         <section>
             <h2>Account Settings</h2>
             <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="johndoe123">
+                <label for="username">Update Username:</label>
+                <input type="text" id="username" name="username" value="johndoe123"><br></br>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="johndoe@example.com">
+                <label for="email">Update Email:</label>
+                <input type="email" id="email" name="email" value="johndoe@example.com"><br></br>
 
-                <label for="password">New Password:</label>
-                <input type="password" id="password" name="password">
+                <label for="major">Update Major:</label>
+                <input type="major" id="major" name="major"><br></br>
 
-                <label for="confirm-password">Confirm New Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password">
-
+                <label for="profile-pic">Update profile picture:</label>
+                <input type="file" id="profile-pic" name="profile-pic" accept="image/*"><br><br>
+                
                 <button type="submit">Save Changes</button>
             </form>
         </section>
         <section>
             <h2>Privacy Settings</h2>
             <form>
+                <label for="password">Update Password:</label>
+                <input type="password" id="password" name="password"><br></br>
+
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password"><br></br>
+
                 <label for="visibility">Profile Visibility:</label>
                 <select id="visibility" name="visibility">
                     <option value="public">Public</option>
                     <option value="private">Private</option>
-                </select>
+                </select><br></br>
 
                 <label for="notifications">Email Notifications:</label>
                 <input type="checkbox" id="notifications" name="notifications" checked>
+                <br></br>
                 <label for="notifications">Receive email notifications</label>
-
                 <button type="submit">Save Changes</button>
             </form>
         </section>
     </main>
     <footer>
+        <div style="position: fixed; bottom: 50px; left: 40%; right: 40%;">
+            <button>View My Profile</button>
+            <button>Main Page</button>
+            <button>Friends</button>        
         <p>&copy; 2024 DATABASE_PROJECT</p>
+        </div>    
     </footer>
 </body>
 </html>
