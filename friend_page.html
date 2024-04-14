@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friend's Profile</title>
+</head>
+<body>
+    <header>
+        <button onclick="">Back</button>
+        <h1>Friend's Profile</h1>
+    </header>
+    <main>
+        <section id="profile">
+            <div>
+                <img src="profile_picture.jpg" alt="Profile Picture">
+            </div>
+            <div>
+                <h2>John Doe</h2>
+                <p>Major: Computer Science</p>
+                <p>Courses: Data Structures, Algorithms, Web Development</p>
+                <p>Interests: Artificial Intelligence, Machine Learning</p>
+                <p>Hobbies: Hiking, Photography</p>
+                <p>Schedule: Monday to Friday, 9:00 AM - 5:00 PM</p>
+                <button onclick="addFriend()">Add Friend</button>
+            </div>
+        </section>
+        <section id="posts" style="display: none;">
+            <h2>Posts by John Doe</h2>
+            <article>
+                <h3>Post Title 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at neque tincidunt, suscipit lorem non, fringilla arcu.</p>
+                <footer>Posted on April 9, 2024</footer>
+            </article>
+            <article>
+                <h3>Post Title 2</h3>
+                <p>Vestibulum cursus ante a elit bibendum, vitae vehicula urna elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <footer>Posted on April 8, 2024</footer>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showProfile()">Profile</a></li>
+                <li><a href="#" onclick="showPosts()">Posts</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+        function showProfile() {
+            document.getElementById('profile').style.display = 'block';
+            document.getElementById('posts').style.display = 'none';
+        }
+
+        function showPosts() {
+            document.getElementById('profile').style.display = 'none';
+            document.getElementById('posts').style.display = 'block';
+        }
+
+        function addFriend() {
+            alert('Friend request sent!');
+        }
+    </script>
+</body>
+</html>
