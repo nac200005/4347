@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>User Profile</title>    
     <style>
-        /* Basic styling for inputs, buttons, and sections */
-        .input-group, .view-group {
+        body {
+            text-align: center;
+        }
+            .input-group, .view-group {
             display: flex;
             align-items: center;
             margin: 5px 0;
@@ -135,6 +137,15 @@
             <button class="view-button" onclick="toggleEditView()">View Profile</button>
         </div>
     </div>
+    
+    <footer style="text-align: center">
+        <div style="position: fixed; bottom: 50px; left: 40%; right: 40%;">
+            <button>View My Profile</button>
+            <button>Main Page</button>
+            <button>Settings</button>        
+        <p>&copy; 2024 DATABASE_PROJECT</p>
+    </div>
+    </footer>
 
     <script>
         function toggleEditView() {
