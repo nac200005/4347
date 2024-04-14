@@ -65,7 +65,7 @@
         
         ?>
         <h1 style="font-size: 60px;">Welcome to Friend Finder!</h1>
-        <h2 style="font-size: 30px;">Fill out the information</h2>
+        <h2 style="font-size: 30px;">Register a new account</h2>
         <form action="registration.php" method="POST">
             <div class="form-group">
                 <input type="text" class="form-control" name="fullname" placeholder="Full Name:">
