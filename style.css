@@ -1,4 +1,57 @@
+body {
+    background-image: url('bg.png'); /* Path to your image file */
+    background-size: cover; /* Adjust image size to cover the entire background */
+    /* You can add more background properties as needed */
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.title {
+    position: fixed; /* Position the title relative to the viewport */
+    top: 0; /* Align the title to the top of the viewport */
+    left: 0; /* Align the title to the left of the viewport */
+    width: 100%; /* Make the title span the entire width of the viewport */
+    background-color: #fff; /* Background color for the title */
+    padding: 10px; /* Padding for the title */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for styling */
+    z-index: 999; /* Optional: Set a high z-index to ensure it appears above other content */
+    /* Add more styling properties as needed */
+    text-align: center;
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space items evenly along the main axis */
+    margin-bottom:30px;
+}
+.button-form {
+    display: inline-block; /* Display forms inline */
+}
+.button-form-post {
+    position: fixed;
+    bottom: 5%;
+    right: 15%;
+}
+
+.button-form-post button {
+    width: 75px; /* Adjust width as needed */
+    height: 75px; /* Adjust height as needed */
+    border-radius: 50%; /* Apply border-radius directly to the button element */
+    background-color: rgb(108, 113, 160);
+    z-index: 998;
+}
+
+
+.title-text {
+    display: inline-block; /* Ensure it doesn't take up the full width */
+    font-weight: bold; /* Optional: Make the text bold */
+}
+
+.logout-button {
+    margin-left: auto; /* Push this button to the right */
+}
+.pad {
+    padding-top: 200px;
+}
 .container{
+    background-color:#f9f9f9;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -45,6 +98,8 @@
     font-size: 16px; /* Smaller font size for the body */
     margin-bottom: 10px; /* Increased margin */
 }
+
+
 
 .like-button {
     background-color: #007bff;

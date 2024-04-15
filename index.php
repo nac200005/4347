@@ -89,15 +89,24 @@ if(isset($_POST['logout_button'])) {
     <!-- <div class="container">
         <h1>Welcome to your Dashboard, <i><?php echo $name; ?><i>!</h1>
     </div> -->
-    <form method="post">
-        <button type="submit" name="settings_button">Go to Settings</button>
-    </form>
-    <form method="post">
-        <button type="submit" name="create_post_button">Post</button>
-    </form>
-    <form method="post">
-        <button type="submit" name="logout_button">Log out</button>
-    </form>
+    
+    <div class="title">
+        <form method="post" class="button-form">
+            <button type="submit" name="settings_button">
+                <i class="fas fa-cog"></i> <!-- Font Awesome cog icon -->
+            </button>
+        </form>
+        <span class="title-text">Friend Finder</span> <!-- Text to be centered -->
+        <form method="post" class="button-form logout-button">
+            <button type="submit" name="logout_button">Log out</button>
+        </form>
+    </div>
+
+
+
+
+
+
 
     <!-- POSTS LOGIC -->
     <?php
@@ -105,14 +114,14 @@ if(isset($_POST['logout_button'])) {
     // Fetch and display posts
     $sql = "SELECT posts.*, users.full_name FROM posts JOIN users ON posts.User_ID = users.id ORDER BY Creation_Date DESC LIMIT 5";
     $result = mysqli_query($conn, $sql);
-
+    echo "<div class='pad'></div>";
     if(mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             // Retrieve post data
             $post_id = $row['Post_ID'];
             $title = $row['Title'];
             $body = $row['Body'];
-            $creationDate = date('d-m', strtotime($row['Creation_Date'])); // Format creation date to DD-MM
+            $creationDate = date('m-d', strtotime($row['Creation_Date'])); // Format creation date to DD-MM
             $creatorName = $row['full_name'];
             $likeCount = $row['Like_Count'];
             echo "<script>updateView($post_id)</script>";
@@ -141,6 +150,8 @@ if(isset($_POST['logout_button'])) {
     // Close the database connection
     mysqli_close($conn);
     ?>
-
+    <form method="post" class="button-form-post">
+        <button type="submit" name="create_post_button">Post</button>
+    </form>
 </body>
 </html>
