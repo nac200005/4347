@@ -53,11 +53,12 @@ if(isset($_POST['logout_button'])) {
     <title>User Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="container">
+    <!-- <div class="container">
         <h1>Welcome to your Dashboard, <i><?php echo $name; ?><i>!</h1>
-    </div>
+    </div> -->
     <form method="post">
         <button type="submit" name="settings_button">Go to Settings</button>
     </form>
@@ -71,13 +72,14 @@ if(isset($_POST['logout_button'])) {
     <!-- POSTS LOGIC -->
     <?php
     // Query to fetch the latest 10 posts with user information and Like_Count
-    $sql = "SELECT posts.*, users.full_name FROM posts JOIN users ON posts.User_ID = users.id ORDER BY Creation_Date DESC LIMIT 10";
+    $sql = "SELECT posts.*, users.full_name FROM posts JOIN users ON posts.User_ID = users.id ORDER BY Creation_Date DESC LIMIT 5";
     $result = mysqli_query($conn, $sql);
 
     // Check if there are any posts
     if(mysqli_num_rows($result) > 0) {
         // Loop through each row to display post information
         while($row = mysqli_fetch_assoc($result)) {
+            $post_id = $row['Post_ID'];
             $title = $row['Title'];
             $body = $row['Body'];
             $creationDate = date('d-m', strtotime($row['Creation_Date'])); // Format creation date to DD-MM
@@ -85,13 +87,19 @@ if(isset($_POST['logout_button'])) {
             $likeCount = $row['Like_Count'];
             
             // Display post information
-            echo "<div class='container'>";
+            echo "<div class='post-container'>";
             echo "<div class='post'>";
-            echo "<h2>$title</h2>";
-            echo "<p>Created by: $creatorName</p>";
-            echo "<p>Creation date: $creationDate</p>";
-            echo "<p>Likes: $likeCount</p>";
-            echo "<p>$body</p>";
+            echo "<div class='post-header'>";
+            echo "<h3>$creatorName - $creationDate</h3>"; // Format: Name - Date
+            echo "<h2 class='post-title'>$title</h2>"; // Title slightly larger than heading
+            echo "</div>"; // Closing tag for post-header
+            echo "<p class='post-body'>$body</p>"; // Text slightly smaller than heading
+
+            // Display likes count with Font Awesome like symbol as a button
+            echo "<div class='like-section'>";
+            echo "<button class='like-button'><i class='fas fa-heart'></i> $likeCount</button>";
+            echo "</div>"; // Closing tag for like-section
+
             echo "</div>"; // Closing tag for post
             echo "</div>"; // Closing tag for post-container
         }

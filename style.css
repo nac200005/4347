@@ -1,19 +1,11 @@
-.body{
-    padding:50px;
-}
-.container{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+.post-container {
+    position: relative;
     max-width: 600px;
     margin: 0 auto;
-    padding: 50px;
-    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+    padding: 20px; /* Reduced padding */
+    box-shadow: rgba(17, 17, 223, 0.2) 0px 7px 29px 0px;
 }
-.form-group{
-    margin-bottom:30px;
-}
+
 .post {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -22,15 +14,51 @@
     margin-bottom: 20px;
 }
 
-.post h2 {
-    font-size: 24px;
+.post-header {
     margin-bottom: 10px;
 }
 
-.post p {
-    margin-bottom: 10px;
+.post-header h3 {
+    font-size: 18px; /* Smaller font size for the header */
+    margin-bottom: 5px; /* Reduced margin */
 }
 
-.post p:last-child {
-    margin-bottom: 0; /* Remove margin-bottom for the last paragraph */
+.post-title {
+    font-size: 28px; /* Larger font size for the title */
+    margin-bottom: 10px; /* Increased margin */
+}
+
+.post-body {
+    font-size: 16px; /* Smaller font size for the body */
+    margin-bottom: 10px; /* Increased margin */
+}
+
+.like-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the like button */
+.like-button {
+    color: black;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Style for the Font Awesome heart icon inside the button */
+.like-button i {
+    font-size: 20px; /* Initial font size */
+    transition: color 0.3s, font-size 0.3s; /* Transition for color and font size */
+}
+
+/* Hover effect for the like button */
+.like-button:hover i {
+    color: red; /* Change color on hover */
+    /* font-size: 24px; Increase font size on hover */
 }
