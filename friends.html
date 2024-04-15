@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px left;
+            padding: 0 20px;
+        }
+        .friend {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .friend img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .friend .name {
+            flex-grow: 0;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .name {
+            height: 50px;
+            overflow-y: auto;
+        }
+        .chatbox {
+            position: fixed;
+            top: 300px; /* Adjust as needed */
+            right: -1%; /* Adjust as needed */
+            width: 1250px; /* Adjust as needed */
+            height: 450px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-y: auto; /* Add scrollbar if content exceeds height */
+        }
+        .chatbox-friend {
+            position: fixed;
+            top: 205px;
+            right: -1%; /* Adjust as needed */
+            width: 1250px; /* Adjust as needed */
+            height: 75px;
+            background-color: #726464;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-y: auto; /* Add scrollbar if content exceeds height */
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Friends</h1>
+</header>
+
+<div class="container">
+    <div class="friend">
+        <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #000; text-align: center; line-height: 50px;">
+            pfp
+        </div>
+        <div class="name">
+            <p>John Doe</p>
+        </div>
+    </div>
+    <div class="friend">
+        <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #000; text-align: center; line-height: 50px;">
+            pfp
+        </div>
+        <div class="name">
+            <p>Jake from State Farm</p>
+        </div>
+    </div>
+    <div class="friend">
+        <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #000; text-align: center; line-height: 50px;">
+            pfp
+        </div>
+        <div class="name">
+            <p>Stephen Hawking doing a wheelie on his wheechair</p>
+        </div>
+    </div>
+</div>
+<div class="chatbox">
+    Just to fill space, this is a chat box we dont need any functionality in this, just good looks
+</div>
+<div class="chatbox-friend">
+    <div class="friend">
+        <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #000; text-align: center; line-height: 50px;">
+            pfp
+        </div>
+        <div class="name">
+            <p>Stephen Hawking doing a wheelie on his wheechair</p>
+        </div>
+</div>
+</div>
+<button onclick="document.location='friendship.html'" style="position: fixed; bottom: 200px; left: 100px;">
+    Add friends
+</button>
+<footer style="text-align: center">
+        <div style="position: fixed; bottom: 50px; left: 40%; right: 40%;">
+            <button onclick="document.location='user.html'">View My Profile</button>
+            <button onclick="document.location='posts.html'">Main Page</button>
+            <button onclick="document.location='settings.html'">Settings</button>         
+        <p>&copy; 2024 DATABASE_PROJECT</p>
+    </div>
+    </footer>
+</body>
+</html>

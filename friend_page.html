@@ -16,23 +16,25 @@
 </style>
 
 <body>
+    <div style="display: flex; align-items: center;">
+        <div style="width: 100px; height: 100px; border-radius: 50%; border: 2px solid #000; text-align: center; line-height: 100px;">
+            Profile Picture
+        </div>
+            <h1 style="margin-left: 20px;" id="displayNameEdit">User Name</h1>
+        </div>
     <header>
-        <button onclick="">Back</button>
-        <h1>Friend's Profile</h1>
     </header>
     <main>
+        
         <section id="profile">
             <div>
-                <img src="profile_picture.jpg" alt="Profile Picture">
-            </div>
-            <div>
-                <h2>John Doe</h2>
+                <p>Birthday: Jun 25, 2003</p>
                 <p>Major: Computer Science</p>
+                <p>User ID: 32242</p>
+                <p>Email: ineedfriends@utdallas.edu</p>
                 <p>Courses: Data Structures, Algorithms, Web Development</p>
                 <p>Interests: Artificial Intelligence, Machine Learning</p>
                 <p>Hobbies: Hiking, Photography</p>
-                <p>Schedule: Monday to Friday, 9:00 AM - 5:00 PM</p>
-                <button onclick="addFriend()">Add Friend</button>
             </div>
         </section>
         <section id="posts" style="display: none;">
@@ -57,9 +59,9 @@
             </ul>
         </nav>
             <div style="position: fixed; bottom: 50px; left: 40%; right: 40%;">
-                <button>View My Profile</button>
-                <button>Main Page</button>
-                <button>Settings</button>        
+                <button onclick="document.location='user.html'">View My Profile</button>
+                <button onclick="document.location='posts.html'">Main Page</button>
+                <button onclick="document.location='settings.html'">Settings</button>        
             <p>&copy; 2024 DATABASE_PROJECT</p>
             </div>
     
@@ -76,9 +78,6 @@
             document.getElementById('posts').style.display = 'block';
         }
 
-        function addFriend() {
-            alert('Friend request sent!');
-        }
     </script>
 </body>
 </html>
