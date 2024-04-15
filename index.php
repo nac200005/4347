@@ -32,6 +32,11 @@ if(isset($_POST['settings_button'])) {
     header("Location: settings.php");
     exit(); // Stop further execution
 }
+//Friends Redirect
+if(isset($_POST['friends_button'])) {
+    header("Location: friends.php");
+    exit(); // Stop further execution
+}
 //Create Post Redirect
 if(isset($_POST['create_post_button'])) {
     header("Location: create_post.php");
@@ -96,18 +101,16 @@ if(isset($_POST['logout_button'])) {
                 <i class="fas fa-cog"></i> <!-- Font Awesome cog icon -->
             </button>
         </form>
+        <form method="post" class="button-form">
+            <button type="submit" name="friends_button">
+                <i class="fas fa-user-friends"></i> <!-- Font Awesome user icon -->
+            </button>
+        </form>
         <span class="title-text">Friend Finder</span> <!-- Text to be centered -->
         <form method="post" class="button-form logout-button">
             <button type="submit" name="logout_button">Log out</button>
         </form>
     </div>
-
-
-
-
-
-
-
     <!-- POSTS LOGIC -->
     <?php
 
