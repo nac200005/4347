@@ -10,25 +10,33 @@
 <body>
     <div class="container">
         <?php
-
+        session_start(); // Start the session
         if(isset($_POST["login"])){
             $email = $_POST["email"];
             $password = $_POST["password"];
             require_once "database.php";
+            
             $sql = "SELECT * FROM users WHERE email = '$email'";
             $result = mysqli_query($conn, $sql);
-            $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            if($user){
-                if(password_verify($password,$user["password"])){
+        
+            if($result && mysqli_num_rows($result) > 0) {
+                $user = mysqli_fetch_assoc($result);
+                
+                if(password_verify($password, $user["password"])){
+                    // If password matches, set the user ID in the session
+                    $_SESSION['user_id'] = $user['id'];
                     header("Location: index.php");
-                    die();
+                    exit(); // Stop further execution
                 } else {
+                    // Password does not match
                     echo "<div class='alert alert-danger'>Password does not match</div>";
                 }
             } else {
+                // Email does not exist
                 echo "<div class='alert alert-danger'>Email does not exist</div>";
             }
         }
+        
 
         ?>
         <h1 style="font-size: 60px;">Welcome to Friend Finder!</h1>

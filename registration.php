@@ -56,7 +56,20 @@
                 if($prepareStmt){
                     mysqli_stmt_bind_param($stmt,"sss",$fullname,$email,$passwordHash);
                     mysqli_stmt_execute($stmt);
-                    echo "<div class='alert alert-success'>You are now registered!</div>";
+                    
+                    // Get the ID of the inserted user
+                    $user_id = mysqli_insert_id($conn);
+
+                    // Insert data to the user_info table
+                    $sql = "INSERT INTO user_info (user_id, email, full_name, username) VALUES (?, ?, ?, ?)";
+                    $stmt = mysqli_stmt_init($conn);
+                    if(mysqli_stmt_prepare($stmt, $sql)){
+                        mysqli_stmt_bind_param($stmt, "isss", $user_id, $email, $fullname, $email);
+                        mysqli_stmt_execute($stmt);
+                        echo "<div class='alert alert-success'>You are now registered!</div>";
+                    } else {
+                        die("Something went wrong");
+                    }
                 } else {
                     die("Something went wrong");
                 }

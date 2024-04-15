@@ -14,3 +14,23 @@
 .form-group{
     margin-bottom:30px;
 }
+.post {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.post h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.post p {
+    margin-bottom: 10px;
+}
+
+.post p:last-child {
+    margin-bottom: 0; /* Remove margin-bottom for the last paragraph */
+}
