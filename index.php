@@ -56,6 +56,36 @@ if(isset($_POST['logout_button'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <script>
+        // JavaScript function to update the like count dynamically
+        function updateLike(post_id) {
+            
+            // Send an AJAX request to update the like count for the post
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_like.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                // alert(xhr.readyState + " " + xhr.status);
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    
+                    // Update the like count on the page
+                    document.querySelector('.post-container[data-post-id="' + post_id + '"] .like-count').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send("post_id=" + post_id);
+            
+        }
+        function updateView(post_id) {
+            
+            // Send an AJAX request to update the like count for the post
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_view.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("post_id=" + post_id);
+            
+        }
+    </script>
+
     <!-- <div class="container">
         <h1>Welcome to your Dashboard, <i><?php echo $name; ?><i>!</h1>
     </div> -->
@@ -71,23 +101,24 @@ if(isset($_POST['logout_button'])) {
 
     <!-- POSTS LOGIC -->
     <?php
-    // Query to fetch the latest 10 posts with user information and Like_Count
+
+    // Fetch and display posts
     $sql = "SELECT posts.*, users.full_name FROM posts JOIN users ON posts.User_ID = users.id ORDER BY Creation_Date DESC LIMIT 5";
     $result = mysqli_query($conn, $sql);
 
-    // Check if there are any posts
     if(mysqli_num_rows($result) > 0) {
-        // Loop through each row to display post information
         while($row = mysqli_fetch_assoc($result)) {
+            // Retrieve post data
             $post_id = $row['Post_ID'];
             $title = $row['Title'];
             $body = $row['Body'];
             $creationDate = date('d-m', strtotime($row['Creation_Date'])); // Format creation date to DD-MM
             $creatorName = $row['full_name'];
             $likeCount = $row['Like_Count'];
+            echo "<script>updateView($post_id)</script>";
             
             // Display post information
-            echo "<div class='post-container'>";
+            echo "<div class='post-container' data-post-id='$post_id'>";
             echo "<div class='post'>";
             echo "<div class='post-header'>";
             echo "<h3>$creatorName - $creationDate</h3>"; // Format: Name - Date
@@ -97,16 +128,19 @@ if(isset($_POST['logout_button'])) {
 
             // Display likes count with Font Awesome like symbol as a button
             echo "<div class='like-section'>";
-            echo "<button class='like-button'><i class='fas fa-heart'></i> $likeCount</button>";
+            echo "<button class='like-button' onclick='updateLike($post_id)'><i class='fas fa-heart'></i> <span class='like-count'>$likeCount</span></button>";
             echo "</div>"; // Closing tag for like-section
 
             echo "</div>"; // Closing tag for post
             echo "</div>"; // Closing tag for post-container
         }
     } else {
-        // If there are no posts
-        echo "<p>No posts found.</p>";
+        echo "No posts found.";
     }
+
+    // Close the database connection
+    mysqli_close($conn);
     ?>
+
 </body>
 </html>

@@ -2,7 +2,7 @@
     position: relative;
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px; /* Reduced padding */
+    padding: 0px; /* Reduced padding */
     box-shadow: rgba(17, 17, 223, 0.2) 0px 7px 29px 0px;
 }
 
