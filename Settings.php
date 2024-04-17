@@ -113,8 +113,16 @@ if(isset($_POST['home_button'])) {
         <div class="form-btn">
             <input type="submit" value="Update Settings" name="update_settings" class="btn btn-primary">
         </div>
+    </form>
+    <br>
+    <br>
+    <form action="delete_account.php" method="post">
+        <div class="form-btn">
+            <input type="submit" value="Delete Account" name="delete_account" class="btn btn-danger">
+        </div>
     </form>       
 </div>  
 
 </body>
 </html>
+

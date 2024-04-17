@@ -1,0 +1,70 @@
+DROP TABLE IF EXISTS `posts`;
+
+DROP TABLE IF EXISTS `post_entries`;
+
+DROP TABLE IF EXISTS `friendships`;
+
+DROP TABLE IF EXISTS `user_info`;
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `user_info` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(30) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `major` varchar(100) DEFAULT NULL,
+  `birthdate` varchar(50) DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `Interests` varchar(1200) DEFAULT NULL,
+  `Courses` varchar(400) DEFAULT NULL,
+  `Schedule` varchar(400) DEFAULT NULL,
+  `Hobbies` varchar(400) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `UTD_Email` (`email`),
+  CONSTRAINT `FK_user_info_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(128) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+
+CREATE TABLE `friendships` (
+  `Friendship_ID` INT NOT NULL AUTO_INCREMENT,
+  `User1_ID` INT NOT NULL,
+  `User2_ID` INT NOT NULL,
+  `Creation_Date` DATETIME DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`Friendship_ID`),
+  INDEX `idx_user1_user2` (`User1_ID`, `User2_ID`),
+  CONSTRAINT `fk_user1` FOREIGN KEY (`User1_ID`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user2` FOREIGN KEY (`User2_ID`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `post_entries` (
+  `Post_ID` INT NOT NULL AUTO_INCREMENT,
+  `User_ID` INT NOT NULL,
+  `Creation_Date` DATETIME DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`Post_ID`),
+  UNIQUE KEY `User_Creation_Date` (`User_ID`, `Creation_Date`),
+  KEY `User_ID` (`User_ID`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `posts` (
+  `Post_ID` INT NOT NULL,
+  `Title` VARCHAR(240) DEFAULT NULL,
+  `Body` VARCHAR(1200) DEFAULT NULL,
+  `Like_Count` INT(11) DEFAULT 0,
+  `View_Count` INT(11) DEFAULT 0,
+  `Creation_Date` DATETIME DEFAULT CURRENT_TIMESTAMP(),
+  `Visibility` CHAR(1) DEFAULT '1',
+  PRIMARY KEY (`Post_ID`),
+  CONSTRAINT `fk_post_id` FOREIGN KEY (`Post_ID`) REFERENCES `post_entries` (`Post_ID`)
+);

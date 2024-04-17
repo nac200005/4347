@@ -11,6 +11,10 @@
     <div class="container">
         <?php
         session_start(); // Start the session
+        if(isset($_POST["register"])){
+            header("Location: registration.php");
+            exit(); // Stop further execution
+        }
         if(isset($_POST["login"])){
             $email = $_POST["email"];
             $password = $_POST["password"];
@@ -48,9 +52,13 @@
             <div class="form-group">
                 <input type="password" placeholder="Enter Password" name="password" class="form-control">
             </div>
+            <div class="button-container">
             <div class="form-btn">
-                <input type="submit" value="Login" name="login" class="btn btn-primary">
+                <input type="submit" value="Login" name="login" class="btn btn-primary button-form">
+                <input type="submit" class="btn btn-primary button-form" name="register" value="Or, Register">
             </div>
+
+            
         </form>
     </div>
     

@@ -11,7 +11,12 @@
 <body>
     <div class="container">
         <?php
-        if(isset($_POST["Register"])){ // Change "submit" to "Register"
+        if(isset($_POST["Login"])){
+            // Redirect to login page if user is not logged in
+            header("Location: login.php");
+            exit(); // Stop further execution
+        }
+        if(isset($_POST["Register"])){
             $fullname = $_POST["fullname"];
             $email = $_POST["email"];
             $password = $_POST["password"];
@@ -50,11 +55,11 @@
             } else {
                 // Insert data to the database
                 
-                $sql = "INSERT INTO users (full_name,email,password) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO users (email,password) VALUES (?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
                 if($prepareStmt){
-                    mysqli_stmt_bind_param($stmt,"sss",$fullname,$email,$passwordHash);
+                    mysqli_stmt_bind_param($stmt,"ss",$email,$passwordHash);
                     mysqli_stmt_execute($stmt);
                     
                     // Get the ID of the inserted user
@@ -77,6 +82,11 @@
         }
         
         ?>
+        <form action="registration.php" method="POST">
+            <div class="form-btn">
+                <input type="submit" class="btn btn-primary" name="Login" value="Login">
+            </div>
+        </form>
         <h1 style="font-size: 60px;">Welcome to Friend Finder!</h1>
         <h2 style="font-size: 30px;">Register a new account</h2>
         <form action="registration.php" method="POST">
@@ -93,7 +103,7 @@
                 <input type="password" class="form-control" name="repeat-password" placeholder="Repeat Password:">
             </div>
             <div class="form-btn">
-                <input type="submit" class="btn btn-primary" name="Register" value="submit">
+                <input type="submit" class="btn btn-primary" name="Register" value="Register">
             </div>
         </form>
     </div> 

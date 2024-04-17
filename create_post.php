@@ -10,7 +10,7 @@ if(isset($_SESSION['user_id'])) {
     $session_id = $_SESSION['user_id'];
 
     // Query to fetch full name from database based on user ID
-    $sql = "SELECT full_name FROM users WHERE id='$session_id'";
+    $sql = "SELECT full_name FROM user_info WHERE user_id='$session_id'";
     $result = mysqli_query($conn, $sql);
 
     if($result && mysqli_num_rows($result) > 0) {
