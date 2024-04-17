@@ -2,6 +2,7 @@ body {
     background-image: url('bg.png'); /* Path to your image file */
     background-size: cover; /* Adjust image size to cover the entire background */
     /* You can add more background properties as needed */
+    background-attachment: fixed;
 }
 ::-webkit-scrollbar {
     display: none;
@@ -60,6 +61,9 @@ body {
     margin: 0 auto;
     padding: 50px;
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+.gap {
+    margin-top:150px;
 }
 .form-group{
     margin-bottom:30px;

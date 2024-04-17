@@ -13,6 +13,7 @@ if(isset($_POST['post_id'])) {
     $sql = "UPDATE posts SET Like_Count = Like_Count + 1 WHERE Post_ID = $post_id";
     if(mysqli_query($conn, $sql)) {
         // Fetch the updated like count
+
         $sql = "SELECT Like_Count FROM posts WHERE Post_ID = $post_id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);

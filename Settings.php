@@ -77,7 +77,7 @@ if(isset($_POST['home_button'])) {
         <button type="submit" name="home_button">Home</button>
     </form>
 
-    <div class="container">
+    <div class="container gap">
     <h2>Account Settings</h2>
     <form action="settings.php" method="post">
         <div class="form-group">

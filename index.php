@@ -61,10 +61,10 @@ if(isset($_POST['logout_button'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <script>
+<script>
         // JavaScript function to update the like count dynamically
         function updateLike(post_id) {
-            
+            console.log("updateLike function called with postId:");
             // Send an AJAX request to update the like count for the post
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "update_like.php", true);
@@ -90,11 +90,6 @@ if(isset($_POST['logout_button'])) {
             
         }
     </script>
-
-    <!-- <div class="container">
-        <h1>Welcome to your Dashboard, <i><?php echo $name; ?><i>!</h1>
-    </div> -->
-    
     <div class="title">
         <form method="post" class="button-form">
             <button type="submit" name="settings_button">
@@ -111,22 +106,29 @@ if(isset($_POST['logout_button'])) {
             <button type="submit" name="logout_button">Log out</button>
         </form>
     </div>
+    
     <!-- POSTS LOGIC -->
     <?php
 
     // Fetch and display posts
-    $sql = "SELECT posts.*, user_info.full_name FROM posts JOIN user_info ON posts.User_ID = user_info.user_id ORDER BY Creation_Date DESC LIMIT 5";
+    $sql = "SELECT post_entries.*, posts.Title, posts.Body, posts.Like_Count, posts.View_Count, user_info.full_name 
+    FROM post_entries 
+    JOIN posts ON post_entries.Post_ID = posts.Post_ID 
+    JOIN user_info ON post_entries.User_ID = user_info.user_id 
+    ORDER BY post_entries.Creation_Date DESC";
+
     $result = mysqli_query($conn, $sql);
     echo "<div class='pad'></div>";
     if(mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             // Retrieve post data
             $post_id = $row['Post_ID'];
-            $title = $row['Title'];
-            $body = $row['Body'];
             $creationDate = date('m-d', strtotime($row['Creation_Date'])); // Format creation date to DD-MM
             $creatorName = $row['full_name'];
+            $title = $row['Title'];
+            $body = $row['Body'];
             $likeCount = $row['Like_Count'];
+            $viewCount = $row['View_Count'];
             echo "<script>updateView($post_id)</script>";
             
             // Display post information
@@ -134,17 +136,22 @@ if(isset($_POST['logout_button'])) {
             echo "<div class='post'>";
             echo "<div class='post-header'>";
             echo "<h3>$creatorName - $creationDate</h3>"; // Format: Name - Date
-            echo "<h2 class='post-title'>$title</h2>"; // Title slightly larger than heading
-            echo "</div>"; // Closing tag for post-header
-            echo "<p class='post-body'>$body</p>"; // Text slightly smaller than heading
 
+            
+
+            echo "</div>"; // Closing tag for post-header
+            echo "<div class='post-body'>";
+            echo "<h4>$title</h4>"; // Display post title
+            echo "<p>$body</p>"; // Display post body
+            echo "</div>"; // Closing tag for post-body
             // Display likes count with Font Awesome like symbol as a button
             echo "<div class='like-section'>";
             echo "<button class='like-button' onclick='updateLike($post_id)'><i class='fas fa-heart'></i> <span class='like-count'>$likeCount</span></button>";
+            echo "<i class='fas fa-eye m-2'></i> <span class='like-count'>$viewCount</span>";
             echo "</div>"; // Closing tag for like-section
-
             echo "</div>"; // Closing tag for post
             echo "</div>"; // Closing tag for post-container
+            
         }
     } else {
         echo "No posts found.";

@@ -55,7 +55,8 @@
             <div class="button-container">
             <div class="form-btn">
                 <input type="submit" value="Login" name="login" class="btn btn-primary button-form">
-                <input type="submit" class="btn btn-primary button-form" name="register" value="Or, Register">
+                <h4>or</h4>
+                <input type="submit" class="btn btn-primary button-form" name="register" value="Register">
             </div>
 
             

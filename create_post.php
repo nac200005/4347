@@ -26,6 +26,7 @@ if(isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit(); // Stop further execution
 }
+
 //Home Redirect
 if(isset($_POST['home_button'])) {
     header("Location: index.php");
@@ -67,16 +68,35 @@ if(isset($_POST['home_button'])) {
                 require_once "database.php";
                 
                 // Prepare the SQL statement
-                $sql = "INSERT INTO posts (User_ID, Title, Body) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO post_entries (User_ID) VALUES (?)";
                 $stmt = mysqli_stmt_init($conn);
                 if(mysqli_stmt_prepare($stmt, $sql)){
                     // Bind parameters and execute the statement
-                    mysqli_stmt_bind_param($stmt, "iss", $session_id, $title, $body);
+                    mysqli_stmt_bind_param($stmt, "i", $session_id);
                     mysqli_stmt_execute($stmt);
         
                     // Check if the insertion was successful
                     if(mysqli_stmt_affected_rows($stmt) > 0){
-                        echo "<div class='alert alert-success'>Post successfully created!</div>";
+                        // Get the last inserted ID
+                        $post_id = mysqli_insert_id($conn);
+                        
+                        // Insert the post details into the posts table
+                        $sql_post = "INSERT INTO posts (Post_ID, Title, Body) VALUES (?, ?, ?)";
+                        $stmt_post = mysqli_stmt_init($conn);
+                        if(mysqli_stmt_prepare($stmt_post, $sql_post)){
+                            // Bind parameters and execute the statement
+                            mysqli_stmt_bind_param($stmt_post, "iss", $post_id, $title, $body);
+                            mysqli_stmt_execute($stmt_post);
+        
+                            // Check if the insertion was successful
+                            if(mysqli_stmt_affected_rows($stmt_post) > 0){
+                                echo "<div class='alert alert-success'>Post successfully created!</div>";
+                            } else {
+                                echo "<div class='alert alert-danger'>Failed to create post.</div>";
+                            }
+                        } else {
+                            echo "<div class='alert alert-danger'>Failed to prepare statement.</div>";
+                        }
                     } else {
                         echo "<div class='alert alert-danger'>Failed to create post.</div>";
                     }

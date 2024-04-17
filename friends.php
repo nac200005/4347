@@ -85,7 +85,11 @@ if(isset($_POST['add_friend_button'])) {
         // Check if there are any friend IDs
         if (!empty($friendIDs)) {
             // Query to retrieve current friends of the user
-            $friendsQuery = "SELECT users.id, users.full_name FROM users INNER JOIN friendships ON users.id = friendships.User2_ID WHERE friendships.User1_ID = $session_id";
+            $friendsQuery = "SELECT users.id, user_info.full_name 
+                            FROM users 
+                            INNER JOIN user_info ON users.id = user_info.user_id  
+                            INNER JOIN friendships ON users.id = friendships.User2_ID 
+                            WHERE friendships.User1_ID = $session_id";
             $friendsResult = mysqli_query($conn, $friendsQuery);
 
             // Check if any friends are found
@@ -104,7 +108,12 @@ if(isset($_POST['add_friend_button'])) {
                 echo "You have no friends yet.";
             }
             // Query to retrieve users who are not friends with the current user
-            $notFriendsQuery = "SELECT id, full_name FROM users WHERE id <> $session_id AND id NOT IN (" . implode(',', $friendIDs) . ")";
+            $notFriendsQuery = "SELECT users.id, user_info.full_name 
+                                FROM users
+                                LEFT JOIN user_info ON users.id = user_info.user_id
+                                WHERE users.id <> $session_id 
+                                AND users.id NOT IN (" . implode(',', $friendIDs) . ")";
+
             $notFriendsResult = mysqli_query($conn, $notFriendsQuery);
 
             // Check if any users who are not friends are found
@@ -127,7 +136,11 @@ if(isset($_POST['add_friend_button'])) {
             }
         } else {
             // If the user has no friends yet, display all users except the current user
-            $allUsersQuery = "SELECT id, full_name FROM users WHERE id <> $session_id";
+            $allUsersQuery = "SELECT users.id, user_info.full_name 
+                            FROM users
+                            LEFT JOIN user_info ON users.id = user_info.user_id
+                            WHERE users.id <> $session_id";
+
             $allUsersResult = mysqli_query($conn, $allUsersQuery);
 
             if(mysqli_num_rows($allUsersResult) > 0) {
